@@ -6,7 +6,6 @@ from werkzeug.utils import secure_filename
 from sklearn.metrics import accuracy_score, confusion_matrix
 from keras.models import load_model
 from skimage.transform import resize
-import tensorflow as tf
 
 import cv2
 
