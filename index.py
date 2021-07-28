@@ -6,14 +6,14 @@ from werkzeug.utils import secure_filename
 from sklearn.metrics import accuracy_score, confusion_matrix
 from keras.models import load_model
 from skimage.transform import resize
-
+import tensorflow as tf
+from tf import keras
 import cv2
 
 app = Flask(__name__)
 
 # loading model
 print("Loading model")
-from tensorflow import keras
 my_model = keras.models.load_model('my_model')
 my_model.load_weights("weights.h5")
 
