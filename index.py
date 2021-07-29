@@ -4,18 +4,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 from werkzeug.utils import secure_filename
 from sklearn.metrics import accuracy_score, confusion_matrix
-from keras.models import load_model
+from keras.models import model_from_json
 from skimage.transform import resize
-import tensorflow as tf
-from tf import keras
 import cv2
 
 app = Flask(__name__)
 
 # loading model
-print("Loading model")
-my_model = keras.models.load_model('my_model')
-my_model.load_weights("weights.h5")
+json_file = open('model.json', 'r')
+loaded_model_json = json_file.read()
+json_file.close()
+loaded_model = model_from_json(loaded_model_json)
+# load weights into new model
+loaded_model.load_weights("model.h5")
 
 @app.route('/', methods=['GET', 'POST'])
 def main_page():
@@ -39,7 +40,7 @@ def prediction(filename):
     test_data = np.array(test_data)
     
     #Step 2
-    probabilities = my_model.predict(test_data)[0][0]
+    probabilities = loaded_model.predict(test_data)[0][0]
     print("the possibility is", probabilities)
     
     #Step 3
@@ -55,4 +56,4 @@ def prediction(filename):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(port=5000)

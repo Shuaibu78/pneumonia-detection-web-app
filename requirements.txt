@@ -12,5 +12,4 @@ Keras==2.4.3
 keras-nightly==2.5.0.dev2021032900
 Keras-Preprocessing==1.1.2
 opencv-python==4.5.3.56
-tensorflow==2.5.0
 tensorflow-estimator==2.5.0
